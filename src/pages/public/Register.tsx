@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Leaf, Mail, Lock, User, Truck, ShoppingCart, ArrowRight, Eye, EyeOff, MapPin, Phone } from 'lucide-react';
-import { useAuth, UserRole } from '../../context/AuthContext';
+import { useAuth } from '../../context/AuthContext';
+import type { UserRole } from '../../context/AuthContext';
 
 const Register = () => {
   const [step, setStep] = useState(1);

@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Target, Eye, Heart, Users, Award, Globe, ArrowRight, Leaf, TrendingUp, Shield } from 'lucide-react';
+import { Target, Eye, Heart, Globe, ArrowRight, Leaf, TrendingUp, Shield } from 'lucide-react';
 
 const About = () => {
   const values = [
