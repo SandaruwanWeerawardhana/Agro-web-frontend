@@ -1,6 +1,8 @@
 import { Link, useLocation } from 'react-router-dom';
-import { Leaf, LogOut, User, Home, BarChart3, Shield, ShoppingCart, FileText, Truck, Package, CreditCard, Search, Settings, LucideIcon } from 'lucide-react';
-import { useAuth, UserRole } from '../../context/AuthContext';
+import { Leaf, LogOut, User, Home, BarChart3, Shield, ShoppingCart, FileText, Truck, Package, CreditCard, Search, Settings } from 'lucide-react';
+import type { LucideIcon } from 'lucide-react';
+import { useAuth } from '../../context/AuthContext';
+import type { UserRole } from '../../context/AuthContext';
 
 interface NavItem {
   path: string;

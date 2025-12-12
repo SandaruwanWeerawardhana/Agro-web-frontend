@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { User, Mail, Phone, MapPin, Save, Camera, Building } from 'lucide-react';
+import { Mail, Phone, MapPin, Save, Camera, Building } from 'lucide-react';
 
 const BuyerProfile = () => {
   const [profile, setProfile] = useState({
