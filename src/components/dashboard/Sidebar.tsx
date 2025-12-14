@@ -1,8 +1,22 @@
-import { Link, useLocation } from 'react-router-dom';
-import { Leaf, LogOut, User, Home, BarChart3, Shield, ShoppingCart, FileText, Truck, Package, CreditCard, Search, Settings } from 'lucide-react';
-import type { LucideIcon } from 'lucide-react';
-import { useAuth } from '../../context/AuthContext';
-import type { UserRole } from '../../context/AuthContext';
+import { Link, useLocation } from "react-router-dom";
+import {
+  Leaf,
+  LogOut,
+  User,
+  Home,
+  BarChart3,
+  Shield,
+  ShoppingCart,
+  FileText,
+  Truck,
+  Package,
+  CreditCard,
+  Search,
+  Settings,
+} from "lucide-react";
+import type { LucideIcon } from "lucide-react";
+import { useAuthStore } from "../../store/authStore";
+import type { UserRole } from "../../store/authStore";
 
 interface NavItem {
   path: string;
@@ -11,35 +25,47 @@ interface NavItem {
 }
 
 const Sidebar = () => {
-  const { user, logout } = useAuth();
+  const { user, logout } = useAuthStore();
   const location = useLocation();
 
   const getNavItems = (role: UserRole): NavItem[] => {
     switch (role) {
-      case 'farmer':
+      case "farmer":
         return [
-          { path: '/farmer/dashboard', label: 'Dashboard', icon: Home },
-          { path: '/farmer/profile', label: 'Profile', icon: User },
-          { path: '/farmer/crop-analysis', label: 'Crop Analysis', icon: BarChart3 },
-          { path: '/farmer/disease-detection', label: 'Disease Detection', icon: Shield },
-          { path: '/farmer/marketplace', label: 'Marketplace', icon: ShoppingCart },
-          { path: '/farmer/orders', label: 'Orders', icon: Package },
-          { path: '/farmer/reports', label: 'Reports', icon: FileText },
+          { path: "/farmer/dashboard", label: "Dashboard", icon: Home },
+          { path: "/farmer/profile", label: "Profile", icon: User },
+          {
+            path: "/farmer/crop-analysis",
+            label: "Crop Analysis",
+            icon: BarChart3,
+          },
+          {
+            path: "/farmer/disease-detection",
+            label: "Disease Detection",
+            icon: Shield,
+          },
+          {
+            path: "/farmer/marketplace",
+            label: "Marketplace",
+            icon: ShoppingCart,
+          },
+          { path: "/farmer/orders", label: "Orders", icon: Package },
+          { path: "/farmer/reports", label: "Reports", icon: FileText },
         ];
-      case 'buyer':
+      case "buyer":
         return [
-          { path: '/buyer/dashboard', label: 'Dashboard', icon: Home },
-          { path: '/buyer/profile', label: 'Profile', icon: User },
-          { path: '/buyer/search', label: 'Search Crops', icon: Search },
-          { path: '/buyer/orders', label: 'Orders', icon: Package },
-          { path: '/buyer/payments', label: 'Payments', icon: CreditCard },
+          { path: "/buyer/dashboard", label: "Dashboard", icon: Home },
+          { path: "/buyer/profile", label: "Profile", icon: User },
+          { path: "/buyer/search", label: "Search Crops", icon: Search },
+          { path: "/buyer/orders", label: "Orders", icon: Package },
+          { path: "/buyer/payments", label: "Payments", icon: CreditCard },
         ];
-      case 'supplier':
+      case "supplier":
         return [
-          { path: '/supplier/dashboard', label: 'Dashboard', icon: Home },
-          { path: '/supplier/profile', label: 'Profile', icon: User },
-          { path: '/supplier/items', label: 'Supply Items', icon: Truck },
-          { path: '/supplier/orders', label: 'Orders', icon: Package },
+          { path: "/supplier/dashboard", label: "Dashboard", icon: Home },
+          { path: "/supplier/profile", label: "Profile", icon: User },
+          { path: "/supplier/items", label: "Supply Items", icon: Truck },
+          { path: "/supplier/orders", label: "Orders", icon: Package },
         ];
       default:
         return [];
@@ -59,16 +85,22 @@ const Sidebar = () => {
       </div>
 
       <div className="sidebar-user">
-        <div className="user-avatar">{user?.name?.charAt(0).toUpperCase() || 'U'}</div>
+        <div className="user-avatar">
+          {user?.name?.charAt(0).toUpperCase() || "U"}
+        </div>
         <div className="user-info">
-          <span className="user-name">{user?.name || 'User'}</span>
+          <span className="user-name">{user?.name || "User"}</span>
           <span className="user-role">{user?.role}</span>
         </div>
       </div>
 
       <nav className="sidebar-nav">
         {navItems.map((item) => (
-          <Link key={item.path} to={item.path} className={`nav-item ${isActive(item.path) ? 'active' : ''}`}>
+          <Link
+            key={item.path}
+            to={item.path}
+            className={`nav-item ${isActive(item.path) ? "active" : ""}`}
+          >
             <item.icon size={20} />
             <span>{item.label}</span>
           </Link>
@@ -80,7 +112,13 @@ const Sidebar = () => {
           <Settings size={20} />
           <span>Settings</span>
         </Link>
-        <button onClick={() => { logout(); window.location.href = '/'; }} className="nav-item logout">
+        <button
+          onClick={() => {
+            logout();
+            window.location.href = "/";
+          }}
+          className="nav-item logout"
+        >
           <LogOut size={20} />
           <span>Logout</span>
         </button>
