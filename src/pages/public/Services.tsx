@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Shield, TrendingUp, Cloud, Smartphone, Truck, BarChart3, Leaf, ArrowRight, Check } from 'lucide-react';
+import { Shield, TrendingUp, Cloud, Truck, BarChart3, Leaf, ArrowRight, Check } from 'lucide-react';
 
 const Services = () => {
   const services = [
