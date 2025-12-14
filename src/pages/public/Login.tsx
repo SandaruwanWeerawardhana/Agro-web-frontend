@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Leaf, Mail, Lock, User, Truck, ShoppingCart, ArrowRight, Eye, EyeOff } from 'lucide-react';
-import { useAuth } from '../../context/AuthContext';
-import type { UserRole } from '../../context/AuthContext';
+import { useAuthStore } from '../../store/authStore';
+import type { UserRole } from '../../store/authStore';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -12,7 +12,7 @@ const Login = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
-  const { login } = useAuth();
+  const { login } = useAuthStore();
   const navigate = useNavigate();
 
   const roles = [

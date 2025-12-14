@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Leaf, Mail, Lock, User, Truck, ShoppingCart, ArrowRight, Eye, EyeOff, MapPin, Phone } from 'lucide-react';
-import { useAuth } from '../../context/AuthContext';
-import type { UserRole } from '../../context/AuthContext';
+import { useAuthStore } from '../../store/authStore';
+import type { UserRole } from '../../store/authStore';
 
 const Register = () => {
   const [step, setStep] = useState(1);
@@ -10,7 +10,7 @@ const Register = () => {
   const [formData, setFormData] = useState({ name: '', email: '', password: '', phone: '', location: '' });
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
-  const { register } = useAuth();
+  const { register } = useAuthStore();
   const navigate = useNavigate();
 
   const roles = [

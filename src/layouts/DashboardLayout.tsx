@@ -1,9 +1,9 @@
-import { Outlet, Navigate } from 'react-router-dom';
-import Sidebar from '../components/dashboard/Sidebar';
-import { useAuth } from '../context/AuthContext';
+import { Outlet, Navigate } from "react-router-dom";
+import Sidebar from "../components/dashboard/Sidebar";
+import { useAuthStore } from "../store/authStore";
 
 const DashboardLayout = () => {
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated } = useAuthStore();
 
   if (!isAuthenticated) {
     return <Navigate to="/login" replace />;
