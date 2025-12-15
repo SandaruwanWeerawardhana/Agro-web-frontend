@@ -28,7 +28,8 @@ agro/
 │   ├── components/      # Reusable React components
 │   │   ├── common/      # Shared components (Navbar, Footer)
 │   │   └── dashboard/   # Dashboard-specific components (Sidebar)
-│   ├── context/         # React Context (AuthContext)
+│   ├── context/         # Legacy context wrappers (delegate to store)
+│   ├── store/           # Zustand stores (auth)
 │   ├── layouts/         # Layout components
 │   │   ├── PublicLayout.tsx
 │   │   └── DashboardLayout.tsx
@@ -90,7 +91,7 @@ agro/
 - **Styling**: Tailwind CSS 4
 - **Routing**: React Router DOM
 - **Icons**: Lucide React
-- **State Management**: React Context API
+- **State Management**: Zustand 
 
 ## 📱 User Roles & Access
 
@@ -112,12 +113,46 @@ agro/
 - Supply item catalog
 - Sales analytics
 
-## 🔐 Authentication
+## 🔐 Authentication & State
 
-The application uses a context-based authentication system with local storage persistence. Mock authentication is currently implemented for development purposes.
+- Uses a Zustand store (`store/authStore.ts`) for global auth state (`user`, `isAuthenticated`, `login`, `logout`, `register`).
+- `AuthProvider` in `context/AuthContext.tsx` is a thin wrapper kept for compatibility; `useAuth` delegates to the Zustand store.
+- Mock authentication is implemented for development and persists the user in `localStorage`.
 
 ## 🎨 Styling
 
 The project uses Tailwind CSS 4 with PostCSS for utility-first styling. Custom components are built with reusable Tailwind classes.
 
 ---
+
+## 🐳 Docker & Docker Compose
+
+### Production build (Nginx serving Vite build)
+```powershell
+docker-compose up -d --build agro-prod
+```
+- Image is built with a multi-stage `Dockerfile` (Node build → Nginx serve).
+- Current port mapping in `docker-compose.yml` is `5173:5173`; Nginx listens on port 80 inside the container. You can change to `80:80` for a conventional mapping.
+- Health check hits the container on port 5173 per the Dockerfile. Align port mappings (e.g., expose 80 and map `80:80`) if you prefer standard Nginx defaults.
+
+### Development (hot reload)
+```powershell
+docker-compose --profile dev up -d --build agro-dev
+```
+- Mounts the workspace for live reload; served by Vite dev server on port 5173.
+
+### Rebuild after code changes
+```powershell
+docker-compose up -d --build
+```
+
+### Clean restart
+```powershell
+docker-compose down
+docker-compose up -d --build
+```
+
+### Full clean (remove volumes/images for this project)
+```powershell
+docker-compose down -v --rmi local
+```
