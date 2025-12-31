@@ -105,6 +105,7 @@ const Navbar = () => {
         }
 
         .navbar-content {
+          position: relative;
           display: flex;
           align-items: center;
           justify-content: space-between;
@@ -118,6 +119,7 @@ const Navbar = () => {
           font-size: var(--font-size-xl);
           font-weight: 800;
           color: var(--primary-600);
+          z-index: 10;
         }
 
         .navbar-logo-icon {
@@ -134,6 +136,9 @@ const Navbar = () => {
         @media (min-width: 768px) {
           .navbar-links {
             display: flex;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
           }
         }
 
@@ -164,6 +169,7 @@ const Navbar = () => {
           display: none;
           align-items: center;
           gap: var(--space-3);
+          z-index: 10;
         }
 
         @media (min-width: 768px) {
